@@ -2,23 +2,36 @@ import express from "express";
 import "dotenv/config";
 import { connectDB } from "./api/utils/connectDB.js";
 import userRouter from "./api/routes/user.routes.js";
-import {bookRoutes} from "./api/routes/book.routes.js";
+import bookRoutes from "./api/routes/book.routes.js";
+import cors from "cors";
 
 const app = express();
-const port = process.env.PORT;
+const port = process.env.PORT || 3000;
 
-app.use(express.json())
-// user Routers 
-app.use("/api/auth",userRouter);
+// ✅ Global CORS Configuration
+app.use(cors({
+    origin: "*", // Allow all origins (change it for security)
+    methods: ["GET", "POST", "PUT", "DELETE"], // Allowed HTTP methods
+    allowedHeaders: ["Content-Type", "Authorization"], // Allowed headers
+    credentials: true // Allow cookies if needed
+}));
 
-// book routes
-app.use("/api/book",bookRoutes);
+app.use(express.json());
 
-app.get("/",(req,res) => {
+// Routes
+app.use("/api/auth", userRouter);
+app.use("/api/book", bookRoutes);
+
+app.get("/", (req, res) => {
     res.send("Hello World");
-})
+});
 
+// Connect to DB and Start Server
 connectDB()
-.then(()=> {
-    app.listen(port,()=>console.log(`Server is running on ${port}`))
-})
+    .then(() => {
+        app.listen(port, () => console.log(`🚀 Server is running on port ${port}`));
+    })
+    .catch((err) => {
+        console.error("❌ Database connection failed:", err);
+        process.exit(1);
+    });

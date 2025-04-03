@@ -1,8 +1,9 @@
 import jwt from "jsonwebtoken";
+import "dotenv/config";
 
 export const checkAuth = async(req, res, next) => {
     const {token} = req.body;
-    if(!userId){
+    if(!token){
         return res.status(400).json({
             message: "Unauthorized User",
             status: false
