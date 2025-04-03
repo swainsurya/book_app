@@ -11,7 +11,8 @@ const port = process.env.PORT || 3000;
 // ✅ Global CORS Configuration
 app.use(cors({
     origin: "*", 
-    methods: ["GET", "POST", "PUT", "DELETE"],
+    methods: ["GET", "POST", "PUT", "DELETE"], 
+    allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true
 }));
 

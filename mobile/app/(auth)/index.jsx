@@ -21,7 +21,7 @@ const index = () => {
         console.log({username,email,password})
         // register(username,email,password);
         const req = await fetch(
-            "http://localhost:3000/api/auth/register",
+            "https://book-app-backend-gb31.onrender.com/api/auth/register",
             {
                 method: "POST",
                 headers: {
