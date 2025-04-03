@@ -7,35 +7,20 @@ import COLORS from '@/constants/colors'
 import { Link } from 'expo-router'
 import { useAuthStore } from '@/store/authStore'
 import axios from 'axios'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 const index = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [showPass, setShowPass] = useState(false);
 
-    const {register, isLoading} = useAuthStore();
-    const username="un123"
+    const {login, isLoading, token,user} = useAuthStore();
 
     const handleLogin = async()=>{
-        // e.preventDefault();
-        console.log({username,email,password})
-        // register(username,email,password);
-        const req = await fetch(
-            "https://book-app-backend-gb31.onrender.com/api/auth/register",
-            {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body:JSON.stringify({
-                    username,
-                    email,
-                    password
-                })
-            },
-        );
-        console.log(req)
-        console.log("From here")
+        login(email,password)
+        console.log(await AsyncStorage.getItem("token"))
+        console.log(token);
+        console.log(user);
     }
     return (
         <KeyboardAvoidingView

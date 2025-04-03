@@ -5,13 +5,19 @@ import { Ionicons } from '@expo/vector-icons'
 import COLORS from '@/constants/colors'
 import { useState } from 'react'
 import { Link, router } from 'expo-router'
+import { useAuthStore } from '@/store/authStore'
 
 const signup = () => {
     const [username, setUsername] = useState("")
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [showpass, setShowPass] = useState("")
-    const [isLoading, setIsLoading] = useState(false)
+
+    const {register, isLoading} = useAuthStore();
+
+    const handleSignup = async()=> {
+        register(username,email,password);
+    }
 
     return (
         <KeyboardAvoidingView
@@ -95,9 +101,7 @@ const signup = () => {
                             </View>
                         </View>
                         {/* Signup BTN */}
-                        <TouchableOpacity style={styles.button} onPress={()=>{
-                            setIsLoading(true)
-                        }}>
+                        <TouchableOpacity style={styles.button} onPress={handleSignup}>
                             {
                                 isLoading?(
                                     <ActivityIndicator size="small" color={"white"} />

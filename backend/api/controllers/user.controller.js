@@ -72,6 +72,7 @@ export const login = async(req,res) => {
             email: user.email,
             profileImage: user.profileImage
         },
-        token
+        token,
+        status: true
     })
 }
