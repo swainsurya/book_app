@@ -24,10 +24,12 @@ export const useAuthStore = create((set) => ({
                 isLoading: false
             });
 
-            console.log("Registration successful", response.data);
+            console.log("Registration successful", response?.data);
         } catch (error) {
-            console.error("Registration failed:", error.response?.data || error.message);
-            set({ isLoading: false }); // Stop loading on failure
+            console.error("Registration failed:", error.response?.data || error.message); // Stop loading on failure
+        }
+        finally{
+            set({ isLoading: false });
         }
     }
 }));

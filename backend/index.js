@@ -10,10 +10,9 @@ const port = process.env.PORT || 3000;
 
 // ✅ Global CORS Configuration
 app.use(cors({
-    origin: "*", // Allow all origins (change it for security)
-    methods: ["GET", "POST", "PUT", "DELETE"], // Allowed HTTP methods
-    allowedHeaders: ["Content-Type", "Authorization"], // Allowed headers
-    credentials: true // Allow cookies if needed
+    origin: "*", 
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true
 }));
 
 app.use(express.json());

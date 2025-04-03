@@ -6,6 +6,7 @@ import { Ionicons } from '@expo/vector-icons'
 import COLORS from '@/constants/colors'
 import { Link } from 'expo-router'
 import { useAuthStore } from '@/store/authStore'
+import axios from 'axios'
 
 const index = () => {
     const [email, setEmail] = useState('');
@@ -16,7 +17,25 @@ const index = () => {
     const username="un123"
 
     const handleLogin = async()=>{
-        register(username,email,password);
+        // e.preventDefault();
+        console.log({username,email,password})
+        // register(username,email,password);
+        const req = await fetch(
+            "http://localhost:3000/api/auth/register",
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body:JSON.stringify({
+                    username,
+                    email,
+                    password
+                })
+            },
+        );
+        console.log(req)
+        console.log("From here")
     }
     return (
         <KeyboardAvoidingView
