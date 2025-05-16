@@ -18,9 +18,10 @@ const index = () => {
 
     const handleLogin = async()=>{
         login(email,password)
-        console.log(await AsyncStorage.getItem("token"))
-        console.log(token);
-        console.log(user);
+        const currUser = await AsyncStorage.getItem("user")
+        const tokens = await AsyncStorage.getItem("token")
+        console.log(currUser)
+        console.log(tokens);
     }
     return (
         <KeyboardAvoidingView
